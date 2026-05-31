@@ -775,17 +775,6 @@ a.bento-card:hover .bento-title {
   color: var(--accent);
 }
 
-.bento-placeholder {
-  grid-column: 1 / -1;
-  border-style: dashed;
-  opacity: 0.45;
-  cursor: default;
-}
-
-.bento-placeholder .bento-img {
-  aspect-ratio: 4 / 1;
-}
-
 .bento-img {
   width: 100%;
   aspect-ratio: 3 / 2;
@@ -882,9 +871,5 @@ a.bento-card:hover .bento-title {
 
   .bento-grid {
     grid-template-columns: 1fr;
-  }
-
-  .bento-placeholder {
-    grid-column: auto;
   }
 }
