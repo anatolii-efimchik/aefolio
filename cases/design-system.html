@@ -48,7 +48,299 @@
         </dl>
       </section>
 
-      <div class="img-placeholder">// тут вставить изображение · DS-01-overview.png — обзор компонентной библиотеки</div>
+      <div class="img-placeholder">// DS-00-cover.png — до/после: слева хаотичный набор кнопок и форм, справа аккуратная сетка унифицированных компонентов</div>
+
+      <!-- ─── TL;DR ─── -->
+      <section class="section">
+        <div class="section-head js-reveal">
+          <p class="eyebrow">TL;DR</p>
+          <h2 data-en="For those who scroll fast" data-ru="Для тех, кто листает быстро">For those who scroll fast</h2>
+        </div>
+        <p class="body-text" data-en='AdCombo is a CPA network with a large personal cabinet (offers, campaigns, statistics, payments, orders). Over the years the product accumulated dozens of screens built by different people at different times. There was no design system — the interface had become chaos: 9 shades of "brand" orange, 4 different button styles, forms rebuilt from scratch on every page.' data-ru="AdCombo — CPA-сеть с большим личным кабинетом (офферы, кампании, статистика, выплаты, ордера). За годы продукт оброс десятками экранов, которые делали разные люди в разное время. Единой дизайн-системы не было — интерфейс превращался в хаос: 9 оттенков «фирменного» оранжевого, 4 разных стиля кнопок, формы, собранные заново на каждой странице.">AdCombo is a CPA network with a large personal cabinet (offers, campaigns, statistics, payments, orders). Over the years the product accumulated dozens of screens built by different people at different times. There was no design system — the interface had become chaos: 9 shades of "brand" orange, 4 different button styles, forms rebuilt from scratch on every page.</p>
+        <p class="body-text" data-en="I conducted an audit, assembled a design system (foundations → tokens → components), connected Figma to code, and migrated the key screens." data-ru="Я провела аудит, собрала дизайн-систему (foundations → токены → компоненты), связала Figma с кодом и перевела на неё ключевые экраны.">I conducted an audit, assembled a design system (foundations → tokens → components), connected Figma to code, and migrated the key screens.</p>
+        <table class="case-table">
+          <thead>
+            <tr>
+              <th data-en="Metric" data-ru="Метрика">Metric</th>
+              <th data-en="Result" data-ru="Результат">Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-en="New screen release time" data-ru="Время выпуска нового экрана">New screen release time</td>
+              <td data-en="−40% (~5 to ~3 days, design + dev)" data-ru="−40% (с ~5 до ~3 дней дизайн+вёрстка)">−40% (~5 to ~3 days, design + dev)</td>
+            </tr>
+            <tr>
+              <td data-en="Visual inconsistencies in new releases" data-ru="Визуальных несоответствий в новых релизах">Visual inconsistencies in new releases</td>
+              <td data-en="−85% (per QA logs)" data-ru="−85% (по QA-логам)">−85% (per QA logs)</td>
+            </tr>
+            <tr>
+              <td data-en="Interface coverage by system components" data-ru="Покрытие интерфейса компонентами системы">Interface coverage by system components</td>
+              <td>0% → 72%</td>
+            </tr>
+            <tr>
+              <td data-en="Sources of truth for design and code" data-ru="Источник правды для дизайна и кода">Sources of truth for design and code</td>
+              <td data-en="1 (instead of scattered mockups)" data-ru="1 (вместо россыпи макетов)">1 (instead of scattered mockups)</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="img-placeholder">// DS-01-metrics.png — 4 крупных числа-плашки (−40%, −85%, 72%, 1 source of truth)</div>
+      </section>
+
+      <!-- ─── Context ─── -->
+      <section class="section">
+        <div class="section-head js-reveal">
+          <p class="eyebrow" data-en="Context" data-ru="Контекст">Context</p>
+          <h2 data-en="What was there" data-ru="Что было">What was there</h2>
+        </div>
+        <p class="body-text" data-en="AdCombo is a partner network. The web cabinet is a dense, data-heavy product: offer tables, campaign builders, statistics with dozens of filters, payments, orders, settings. Plus a marketing side: registration landing pages and a blog." data-ru="AdCombo — партнёрская сеть. Веб-кабинет — это плотный data-heavy продукт: таблицы офферов, конструкторы кампаний, статистика с десятками фильтров, выплаты, ордера, настройки. Плюс маркетинговая часть: лендинги регистрации и блог.">AdCombo is a partner network. The web cabinet is a dense, data-heavy product: offer tables, campaign builders, statistics with dozens of filters, payments, orders, settings. Plus a marketing side: registration landing pages and a blog.</p>
+        <p class="body-text" data-en="No design system existed. I confirmed this with a technical audit — exported actual CSS from all key pages. The numbers speak for themselves:" data-ru="Дизайн-системы не существовало. Я подтвердила это техническим аудитом — выгрузила реальный CSS со всех ключевых страниц. Цифры говорят сами за себя:">No design system existed. I confirmed this with a technical audit — exported actual CSS from all key pages. The numbers speak for themselves:</p>
+        <table class="case-table">
+          <thead>
+            <tr>
+              <th data-en="Area" data-ru="Область">Area</th>
+              <th data-en="What was found" data-ru="Что обнаружено">What was found</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-en="Color" data-ru="Цвет">Color</td>
+              <td data-en='The "primary" accent was different on almost every page: #e74011 on dashboard/news/payouts, #e63e21 on create-campaign/offer/settings, #ffbb0f on offers, #34a835 on statistics, #ff0000 on the landing — while the logo brand color is #ef4e23. Impossible to tell which color meant "action" and which meant "danger".' data-ru="«Основной» акцент оказался разным почти на каждой странице: #e74011 на dashboard/news/payouts, #e63e21 на create-campaign/offer/settings, #ffbb0f на offers, #34a835 на statistics, #ff0000 на лендинге — при том что в логотипе бренд-цвет #ef4e23. Было невозможно сказать, какой цвет значит «действие», а какой — «опасность».">The "primary" accent was different on almost every page: #e74011 on dashboard/news/payouts, #e63e21 on create-campaign/offer/settings, #ffbb0f on offers, #34a835 on statistics, #ff0000 on the landing — while the logo brand color is #ef4e23. Impossible to tell which color meant "action" and which meant "danger".</td>
+            </tr>
+            <tr>
+              <td data-en="Grid" data-ru="Сетка">Grid</td>
+              <td data-en="Base spacing floated between 2/5/10/15px depending on the page — no unified spacing system." data-ru="Базовый отступ плавал между 2/5/10/15px в зависимости от страницы — единой системы интервалов не было.">Base spacing floated between 2/5/10/15px depending on the page — no unified spacing system.</td>
+            </tr>
+            <tr>
+              <td data-en="Radii" data-ru="Радиусы">Radii</td>
+              <td data-en="Button corner radii: 0, 3, 4, 15, and 50px — mixed even within a single screen." data-ru="Скругления кнопок: 0, 3, 4, 15 и 50px вперемешку даже в пределах одного экрана.">Button corner radii: 0, 3, 4, 15, and 50px — mixed even within a single screen.</td>
+            </tr>
+            <tr>
+              <td data-en="Components" data-ru="Компоненты">Components</td>
+              <td data-en="A button existed in a dozen incompatible implementations (filled, filled-2…5, ghost, outline) with different padding, font sizes, and colors. Forms rebuilt from scratch on every page." data-ru="Кнопка существовала в десятке несводимых реализаций (filled, filled-2…5, ghost, outline) с разными паддингами, размерами шрифта и цветами. Формы собирались заново на каждой странице.">A button existed in a dozen incompatible implementations (filled, filled-2…5, ghost, outline) with different padding, font sizes, and colors. Forms rebuilt from scratch on every page.</td>
+            </tr>
+            <tr>
+              <td data-en="Typography" data-ru="Типографика">Typography</td>
+              <td data-en="Headings rotated between Scada, Inter, and Oswald; in the cabinet one font carried both headings and body text with no hierarchy." data-ru="Заголовки крутились между Scada, Inter и Oswald; в кабинете один шрифт нёс и заголовки, и текст без иерархии.">Headings rotated between Scada, Inter, and Oswald; in the cabinet one font carried both headings and body text with no hierarchy.</td>
+            </tr>
+            <tr>
+              <td data-en="Technical debt" data-ru="Технический долг">Technical debt</td>
+              <td data-en="The :root contained an unconfigured default PrimeNG theme (--primary-color: #007ad9 — a blue absent from the brand) on top of custom --ADC--* variables. The token infrastructure existed but was never aligned to the brand." data-ru="В :root обнаружилась ненастроенная дефолтная тема PrimeNG (--primary-color: #007ad9 — синий, которого нет в бренде) поверх кастомных --ADC--* переменных. Инфраструктура токенов была, но её никто не привёл к бренду.">The :root contained an unconfigured default PrimeNG theme (--primary-color: #007ad9 — a blue absent from the brand) on top of custom --ADC--* variables. The token infrastructure existed but was never aligned to the brand.</td>
+            </tr>
+            <tr>
+              <td data-en="Process" data-ru="Процесс">Process</td>
+              <td data-en='Developers didn\'t know which mockup was "correct" and often coded from memory. Design and code diverged.' data-ru="Разработчик не знал, какой макет «правильный», и часто верстал «по памяти». Дизайн и код расходились.">Developers didn't know which mockup was "correct" and often coded from memory. Design and code diverged.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="img-placeholder">// DS-02-chaos.png — коллаж «свидетельства хаоса»: форма регистрации с лендинга и форма смены пароля из настроек рядом</div>
+        <div class="callout callout-warning">
+          <p class="callout-title" data-en="Why it was a business problem, not taste" data-ru="Почему это была проблема для бизнеса, а не «вкусовщина»">Why it was a business problem, not taste</p>
+          <ul class="plain-list">
+            <li data-en="Every new screen = reinventing basic elements → slow releases." data-ru="Каждый новый экран = переизобретение базовых элементов → медленные релизы.">Every new screen = reinventing basic elements → slow releases.</li>
+            <li data-en="Inconsistency reduced partner trust in the platform — a finance product where trust = money." data-ru="Несогласованность снижала доверие партнёров к платформе — это finance-продукт, где доверие = деньги.">Inconsistency reduced partner trust in the platform — a finance product where trust = money.</li>
+            <li data-en="QA constantly caught visual bugs that weren't bugs — nobody knew the standard." data-ru="QA постоянно ловил визуальные баги, которые не были «багами» — просто никто не знал эталон.">QA constantly caught visual bugs that weren't bugs — nobody knew the standard.</li>
+            <li data-en="Onboarding new designers and developers took weeks." data-ru="Онбординг новых дизайнеров и разработчиков занимал недели.">Onboarding new designers and developers took weeks.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ─── Goals ─── -->
+      <section class="section">
+        <div class="section-head js-reveal">
+          <p class="eyebrow" data-en="Goals" data-ru="Цели">Goals</p>
+          <h2 data-en="What we set out to achieve" data-ru="Что поставили целью">What we set out to achieve</h2>
+        </div>
+        <p class="body-text" data-en="Business goal: speed up interface delivery and reduce the cost of UI maintenance. Product task: create a unified design system — a single source of truth for design and code — and migrate the key cabinet screens to it." data-ru="Бизнес-цель: ускорить выпуск интерфейсов и снизить стоимость поддержки UI. Продуктовая задача: создать единую дизайн-систему — источник правды для дизайна и кода — и перевести на неё ключевые экраны кабинета.">Business goal: speed up interface delivery and reduce the cost of UI maintenance. Product task: create a unified design system — a single source of truth for design and code — and migrate the key cabinet screens to it.</p>
+        <table class="case-table">
+          <thead>
+            <tr>
+              <th data-en="KPI" data-ru="KPI">KPI</th>
+              <th data-en="Target" data-ru="Цель">Target</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-en="Time-to-market for a new screen" data-ru="Time-to-market нового экрана">Time-to-market for a new screen</td>
+              <td data-en="Reduce" data-ru="Сократить">Reduce</td>
+            </tr>
+            <tr>
+              <td data-en="Visual inconsistencies in releases" data-ru="Визуальные несоответствия в релизах">Visual inconsistencies in releases</td>
+              <td data-en="Reduce" data-ru="Снизить">Reduce</td>
+            </tr>
+            <tr>
+              <td data-en="Coverage of key screens by system components" data-ru="Покрытие ключевых экранов компонентами системы">Coverage of key screens by system components</td>
+              <td>≥ 70%</td>
+            </tr>
+            <tr>
+              <td data-en="Design and code token alignment" data-ru="Согласованность токенов дизайна и кода">Design and code token alignment</td>
+              <td data-en="1 shared token set" data-ru="1 общий набор токенов">1 shared token set</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout">
+          <p class="callout-title" data-en="Scope constraints" data-ru="Ограничения скоупа">Scope constraints</p>
+          <p data-en="Can't stop product development — migration is gradual. No rebranding — working with the existing identity (orange/yellow logo). Deliberately out of scope for phase 1: light/dark themes and animation/motion — to avoid inflating the system before the foundation is in place." data-ru="Нельзя останавливать разработку продукта — миграция постепенная. Ребрендинг не входит — работаем с существующей айдентикой (оранжевый/жёлтый логотип). На первом этапе сознательно вне скоупа: light/dark темы и анимация/motion — чтобы не раздувать систему до того, как закрыта база.">Can't stop product development — migration is gradual. No rebranding — working with the existing identity (orange/yellow logo). Deliberately out of scope for phase 1: light/dark themes and animation/motion — to avoid inflating the system before the foundation is in place.</p>
+        </div>
+      </section>
+
+      <!-- ─── Research ─── -->
+      <section class="section">
+        <div class="section-head js-reveal">
+          <p class="eyebrow" data-en="Research" data-ru="Исследование">Research</p>
+          <h2 data-en="UI inventory" data-ru="UI-инвентаризация">UI inventory</h2>
+        </div>
+        <p class="body-text" data-en="I took screenshots of all cabinet and marketing screens and collected them on a single FigJam board. Then went through with a marker: highlighted every button, field, badge, table, color." data-ru="Я сделала скриншоты всех экранов кабинета и маркетинга и собрала их на одну FigJam-доску. Затем прошлась маркером: выделила каждую кнопку, поле, бейдж, таблицу, цвет.">I took screenshots of all cabinet and marketing screens and collected them on a single FigJam board. Then went through with a marker: highlighted every button, field, badge, table, color.</p>
+        <div class="img-placeholder">// DS-03-inventory.png — FigJam-доска с UI-инвентарём: сетка скриншотов с цветными пометками</div>
+        <p class="body-text" data-en="What the inventory found — confirmed by CSS export (228 custom CSS variables in :root):" data-ru="Что насчитала по итогам инвентаря — подтверждено выгрузкой CSS (228 кастомных CSS-переменных в :root):">What the inventory found — confirmed by CSS export (228 custom CSS variables in :root):</p>
+        <table class="case-table">
+          <thead>
+            <tr>
+              <th data-en="Found" data-ru="Найдено">Found</th>
+              <th data-en="Needed" data-ru="Нужно">Needed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-en="7+ shades of the primary accent across pages" data-ru="7+ оттенков основного акцента на разных страницах">7+ shades of the primary accent across pages</td>
+              <td data-en="1 brand palette" data-ru="1 бренд-палитра">1 brand palette</td>
+            </tr>
+            <tr>
+              <td data-en="Dozen incompatible button implementations (filled, filled-2…5, ghost, outline)" data-ru="Десяток несводимых реализаций кнопки (filled, filled-2…5, ghost, outline)">Dozen incompatible button implementations (filled, filled-2…5, ghost, outline)</td>
+              <td data-en="4 roles" data-ru="4 роли">4 roles</td>
+            </tr>
+            <tr>
+              <td data-en="3 font families (Scada / Inter / Oswald)" data-ru="3 шрифтовых семейства (Scada / Inter / Oswald)">3 font families (Scada / Inter / Oswald)</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td data-en="Base spacing 2/5/10/15px" data-ru="Базовый отступ 2/5/10/15px">Base spacing 2/5/10/15px</td>
+              <td data-en="1 scale" data-ru="1 шкала">1 scale</td>
+            </tr>
+            <tr>
+              <td data-en="Radii 0/3/4/15/50px" data-ru="Радиусы 0/3/4/15/50px">Radii 0/3/4/15/50px</td>
+              <td data-en="1 scale" data-ru="1 шкала">1 scale</td>
+            </tr>
+            <tr>
+              <td data-en="PrimeNG default theme in :root, not aligned to the brand" data-ru="Дефолтная тема PrimeNG в :root, не приведённая к бренду">PrimeNG default theme in :root, not aligned to the brand</td>
+              <td data-en="Brand tokens" data-ru="Бренд-токены">Brand tokens</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <div class="section-head js-reveal">
+          <h2 data-en="Team interviews" data-ru="Интервью с командой">Team interviews</h2>
+        </div>
+        <p class="body-text" data-en="Short interviews with 3 designers and 3 developers. Key insights:" data-ru="Провела короткие интервью с 3 дизайнерами и 3 разработчиками. Главные инсайты:">Short interviews with 3 designers and 3 developers. Key insights:</p>
+        <ul class="plain-list">
+          <li data-en="Designers spent up to 30% of their time recreating basic elements." data-ru="Дизайнеры тратили до 30% времени на пересоздание базовых элементов.">Designers spent up to 30% of their time recreating basic elements.</li>
+          <li data-en="Developers didn't trust mockups and asked about every spacing value." data-ru="Разработчики не доверяли макетам и переспрашивали по каждому отступу.">Developers didn't trust mockups and asked about every spacing value.</li>
+          <li data-en='Everyone wanted "a single set" but never had the resources to build it.' data-ru='Все хотели «единый набор», но раньше не было ресурса его собрать.'>Everyone wanted "a single set" but never had the resources to build it.</li>
+        </ul>
+        <div class="img-placeholder">// DS-04-quotes.png — 3 карточки с цитатами из интервью</div>
+      </section>
+
+      <section class="section">
+        <div class="section-head js-reveal">
+          <h2 data-en="Benchmarking" data-ru="Бенчмаркинг">Benchmarking</h2>
+        </div>
+        <p class="body-text" data-en="Studied how public design systems are structured (Material, Atlassian, Polaris, Carbon) — how they build token hierarchies, how they document components, how they handle governance. From this I assembled the target architecture." data-ru="Изучила, как устроены публичные дизайн-системы (Material, Atlassian, Polaris, Carbon) — на чём строят иерархию токенов, как документируют компоненты, как ведут governance. Из этого собрала целевую архитектуру.">Studied how public design systems are structured (Material, Atlassian, Polaris, Carbon) — how they build token hierarchies, how they document components, how they handle governance. From this I assembled the target architecture.</p>
+      </section>
+
+      <!-- ─── Strategy ─── -->
+      <section class="section">
+        <div class="section-head js-reveal">
+          <p class="eyebrow" data-en="Strategy" data-ru="Стратегия">Strategy</p>
+          <h2 data-en="Architecture" data-ru="Архитектура">Architecture</h2>
+        </div>
+        <p class="body-text" data-en="I chose a layered architecture: Foundations → Tokens → Variables → Atoms → Molecules → Organisms → Templates, with a three-level token system (primitive → semantic → component) and a Figma ↔ code connection via Code Connect." data-ru="Я выбрала архитектуру по слоям: Foundations → Tokens → Variables → Atoms → Molecules → Organisms → Templates, с трёхуровневой системой токенов (primitive → semantic → component) и связкой Figma ↔ код через Code Connect.">I chose a layered architecture: Foundations → Tokens → Variables → Atoms → Molecules → Organisms → Templates, with a three-level token system (primitive → semantic → component) and a Figma ↔ code connection via Code Connect.</p>
+        <div class="img-placeholder">// DS-05-architecture.png — пирамида слоёв со стрелками наследования</div>
+      </section>
+
+      <section class="section">
+        <div class="section-head js-reveal">
+          <h2 data-en="Foundations and tokens" data-ru="Foundations и токены">Foundations and tokens</h2>
+        </div>
+        <p class="body-text" data-en="First step: fix the foundations and clean up color. Key brand decision:" data-ru="Первым делом зафиксировала основы и навела порядок в цвете. Ключевое решение по бренду:">First step: fix the foundations and clean up color. Key brand decision:</p>
+        <ul class="plain-list">
+          <li data-en="orange = brand and primary action" data-ru="оранжевый = бренд и основное действие">orange = brand and primary action</li>
+          <li data-en="red = danger/error + primary marketing CTA" data-ru="красный = опасность/ошибка + главный маркетинговый CTA">red = danger/error + primary marketing CTA</li>
+          <li data-en="yellow = accent/label (TOP)" data-ru="жёлтый = акцент/метка (TOP)">yellow = accent/label (TOP)</li>
+        </ul>
+        <p class="body-text" data-en="Reduced 9 shades to a clean palette with three token levels, verified contrast against WCAG AA." data-ru="Свела 9 оттенков к чистой палитре с тремя уровнями токенов и проверила контраст по WCAG AA.">Reduced 9 shades to a clean palette with three token levels, verified contrast against WCAG AA.</p>
+        <table class="case-table">
+          <thead>
+            <tr>
+              <th data-en="Level" data-ru="Уровень">Level</th>
+              <th data-en="Example" data-ru="Пример">Example</th>
+              <th data-en="What it does" data-ru="Для чего">What it does</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Primitive</td>
+              <td>color.orange.500: #EF4E23</td>
+              <td data-en="Raw values — not used directly in design" data-ru="Сырые значения — в дизайне напрямую не используются">Raw values — not used directly in design</td>
+            </tr>
+            <tr>
+              <td>Semantic</td>
+              <td>color.action.primary: orange.500</td>
+              <td data-en="Intent — what this value means in context" data-ru="Смысл — что это значение означает в контексте">Intent — what this value means in context</td>
+            </tr>
+            <tr>
+              <td>Component</td>
+              <td>button-primary-bg: color.action.primary</td>
+              <td data-en="Component-specific binding — enables isolated overrides" data-ru="Привязка к компоненту — позволяет делать изолированные переопределения">Component-specific binding — enables isolated overrides</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout">
+          <p data-en="Brand palette derived from the logo: orange-red #EF4E23 (primary), golden-yellow #FCB813 (accent/TOP labels), clean red #E01818 (errors). Typography normalized to two families: Oswald (headings/UI) + Scada (body text)." data-ru="Бренд-палитра выведена из логотипа: оранж-красный #EF4E23 (основной), жёлто-золотой #FCB813 (акцент/метки TOP), чистый красный #E01818 (ошибки). Типографика нормализована до двух семейств: Oswald (заголовки/UI) + Scada (текст).">Brand palette derived from the logo: orange-red #EF4E23 (primary), golden-yellow #FCB813 (accent/TOP labels), clean red #E01818 (errors). Typography normalized to two families: Oswald (headings/UI) + Scada (body text).</p>
+        </div>
+        <div class="img-placeholder">// DS-06-tokens.png — страница Foundations в Figma: палитра со свотчами и токенами, типошкала, spacing-scale</div>
+      </section>
+
+      <section class="section">
+        <div class="section-head js-reveal">
+          <h2 data-en="Components" data-ru="Компоненты">Components</h2>
+        </div>
+        <p class="body-text" data-en="Built the library: atoms (Button, Input, Select, Checkbox, Toggle, Badge, Tag…), molecules (Form field, Search, Pagination, Date field, Pill-tab…), organisms (Sidebar, Topbar, Data table, Filter panel, Offer card, forms, Date range picker)." data-ru="Собрала библиотеку: атомы (Button, Input, Select, Checkbox, Toggle, Badge, Tag…), молекулы (Form field, Search, Pagination, Date field, Pill-tab…), организмы (Sidebar, Topbar, Data table, Filter panel, Offer card, формы, Date range picker).">Built the library: atoms (Button, Input, Select, Checkbox, Toggle, Badge, Tag…), molecules (Form field, Search, Pagination, Date field, Pill-tab…), organisms (Sidebar, Topbar, Data table, Filter panel, Offer card, forms, Date range picker).</p>
+        <p class="body-text" data-en="Every component has all states: default / hover / active / focus / disabled / loading / error / empty." data-ru="У каждого компонента — все состояния: default / hover / active / focus / disabled / loading / error / empty.">Every component has all states: default / hover / active / focus / disabled / loading / error / empty.</p>
+        <div class="img-placeholder">// DS-07-components.png — сетка вариантов Button со всеми состояниями и размерами</div>
+        <div class="img-placeholder">// DS-08-table.png — организм Data table с вариантами: обычная строка, hover, выделение, пустое состояние</div>
+      </section>
+
+      <section class="section">
+        <div class="section-head js-reveal">
+          <h2 data-en="Figma ↔ code connection" data-ru="Связка с кодом">Figma ↔ code connection</h2>
+        </div>
+        <p class="body-text" data-en="Set up a code library on Tailwind + shadcn/ui, exported Variables to tokens.json via Tokens Studio, and connected Figma components to code via Code Connect — the actual snippet is now visible from the mockup." data-ru="Подняла кодовую библиотеку на Tailwind + shadcn/ui, экспортировала Variables в tokens.json через Tokens Studio и связала Figma-компоненты с кодом через Code Connect — теперь из макета виден реальный сниппет.">Set up a code library on Tailwind + shadcn/ui, exported Variables to tokens.json via Tokens Studio, and connected Figma components to code via Code Connect — the actual snippet is now visible from the mockup.</p>
+        <p class="body-text" data-en="In parallel made components AI-ready: wrote machine-readable metadata for each (variants, states, tokens, do/don't rules, anti-patterns) so AI assistants assemble interfaces from existing components rather than generating new ones. Tokens exported to a single tokens.json, metadata in a per-component schema." data-ru="Параллельно сделала компоненты AI-ready: для каждого описала машиночитаемые метаданные (варианты, состояния, токены, правила do/don't, анти-паттерны) — чтобы ИИ-ассистенты собирали интерфейсы из готовых компонентов, а не плодили новые. Токены выгружены в единый tokens.json, метаданные — по схеме на каждый компонент.">In parallel made components AI-ready: wrote machine-readable metadata for each (variants, states, tokens, do/don't rules, anti-patterns) so AI assistants assemble interfaces from existing components rather than generating new ones. Tokens exported to a single tokens.json, metadata in a per-component schema.</p>
+        <div class="img-placeholder">// DS-09-code-connect.png — панель Code Connect: Figma-компонент Button рядом с его кодовым представлением</div>
+      </section>
+
+      <section class="section">
+        <div class="section-head js-reveal">
+          <h2 data-en="Screen migration" data-ru="Пересборка экранов">Screen migration</h2>
+        </div>
+        <p class="body-text" data-en="Migrated key cabinet screens (Offers, Statistics, forms, cabinet layout) to system components — a real-world stress test." data-ru="Перевела ключевые экраны кабинета (Offers, Statistics, формы, кабинетный layout) на компоненты системы — проверка «боем».">Migrated key cabinet screens (Offers, Statistics, forms, cabinet layout) to system components — a real-world stress test.</p>
+        <div class="img-placeholder">// DS-10-before-after.png — до/после: страница Offers — слева старая версия с разнобоем, справа пересобранная на компонентах системы</div>
+      </section>
+
+      <!-- ─── Documentation ─── -->
+      <section class="section">
+        <div class="section-head js-reveal">
+          <p class="eyebrow" data-en="Documentation" data-ru="Документация">Documentation</p>
+          <h2 data-en="Governance" data-ru="Governance">Governance</h2>
+        </div>
+        <p class="body-text" data-en="Used a single template to document every component: anatomy, variants, tokens, do/don't, accessibility. Set up a changelog, semver versioning, and a contribution process (how to propose a new component)." data-ru="По единому шаблону описала каждый компонент: анатомия, варианты, токены, do/don't, доступность. Завела changelog, semver-версионирование и процесс контрибуции (как предложить новый компонент).">Used a single template to document every component: anatomy, variants, tokens, do/don't, accessibility. Set up a changelog, semver versioning, and a contribution process (how to propose a new component).</p>
+        <div class="callout">
+          <p data-en="A design system without documentation is just a library of beautiful frames. Documentation is what turns a system into a shared language — not a personal collection." data-ru="Дизайн-система без документации — это просто библиотека красивых фреймов. Документация — то, что превращает систему в общий язык, а не в личную коллекцию.">A design system without documentation is just a library of beautiful frames. Documentation is what turns a system into a shared language — not a personal collection.</p>
+        </div>
+        <div class="img-placeholder">// DS-11-docs.png — страница документации компонента Button: анатомия, варианты, состояния, do/don't</div>
+      </section>
 
       <!-- ─── Results ─── -->
       <section class="section">
@@ -66,312 +358,77 @@
           </thead>
           <tbody>
             <tr>
-              <td data-en="Time to design a new screen" data-ru="Время проектирования нового экрана">Time to design a new screen</td>
-              <td data-en="~4 hours" data-ru="~4 часа">~4 hours</td>
-              <td data-en="~2.5 hours (−37%)" data-ru="~2,5 часа (−37%)">~2.5 hours (−37%)</td>
+              <td data-en="Time-to-market for a new screen" data-ru="Time-to-market нового экрана">Time-to-market for a new screen</td>
+              <td data-en="~5 days" data-ru="~5 дней">~5 days</td>
+              <td data-en="~3 days (−40%)" data-ru="~3 дня (−40%)">~3 days (−40%)</td>
             </tr>
             <tr>
-              <td data-en="Dev time for a new component" data-ru="Время разработки нового компонента">Dev time for a new component</td>
-              <td data-en="3–5 days" data-ru="3–5 дней">3–5 days</td>
-              <td data-en="0.5–1 day (−75%)" data-ru="0,5–1 день (−75%)">0.5–1 day (−75%)</td>
+              <td data-en="Visual inconsistencies in releases" data-ru="Визуальные несоответствия в релизах">Visual inconsistencies in releases</td>
+              <td data-en="baseline" data-ru="базлайн">baseline</td>
+              <td>−85%</td>
             </tr>
             <tr>
-              <td data-en="Style bugs per sprint" data-ru="Стайл-баги за спринт">Style bugs per sprint</td>
-              <td>~14</td>
-              <td data-en="~2 (−86%)" data-ru="~2 (−86%)">~2 (−86%)</td>
+              <td data-en="Interface coverage by system components" data-ru="Покрытие интерфейса компонентами системы">Interface coverage by system components</td>
+              <td>0%</td>
+              <td>72%</td>
             </tr>
             <tr>
-              <td data-en="Component reuse rate" data-ru="Доля повторного использования компонентов">Component reuse rate</td>
-              <td>~12%</td>
-              <td>~78%</td>
+              <td data-en="Sources of truth (design/code)" data-ru="Источников правды (дизайн/код)">Sources of truth (design/code)</td>
+              <td data-en="scattered mockups" data-ru="россыпь макетов">scattered mockups</td>
+              <td>1</td>
             </tr>
             <tr>
-              <td data-en="New designer onboarding" data-ru="Онбординг нового дизайнера">New designer onboarding</td>
-              <td data-en="~3 weeks to first independent screen" data-ru="~3 недели до первого самостоятельного экрана">~3 weeks to first independent screen</td>
-              <td data-en="~1 week" data-ru="~1 неделя">~1 week</td>
+              <td data-en="Brand color shades" data-ru="Оттенков бренд-цвета">Brand color shades</td>
+              <td>9</td>
+              <td data-en="1 palette, 3 levels" data-ru="1 палитра, 3 уровня">1 palette, 3 levels</td>
+            </tr>
+            <tr>
+              <td data-en="Heading font families" data-ru="Шрифтов для заголовков">Heading font families</td>
+              <td>3</td>
+              <td>2</td>
             </tr>
           </tbody>
         </table>
-        <div class="img-placeholder">// тут вставить изображение · DS-07-results.png — before/after экраны продукта</div>
+        <div class="img-placeholder">// DS-12-results.png — дашборд результатов: бар-чарты до/после по каждой метрике</div>
+        <div class="callout">
+          <p class="callout-title" data-en="Qualitative effects" data-ru="Качественный эффект">Qualitative effects</p>
+          <ul class="plain-list">
+            <li data-en="Designers stopped recreating basic elements and focused on product tasks." data-ru="Дизайнеры перестали пересоздавать базовые элементы и сосредоточились на продуктовых задачах.">Designers stopped recreating basic elements and focused on product tasks.</li>
+            <li data-en="Developers code faster without back-and-forth — mockup = code." data-ru="Разработчики верстают быстрее и без переспросов — макет = код.">Developers code faster without back-and-forth — mockup = code.</li>
+            <li data-en='QA has a standard: "correct" now has a definition.' data-ru='QA получил эталон: «правильно» теперь имеет определение.'>QA has a standard: "correct" now has a definition.</li>
+            <li data-en="Onboarding new team members is faster." data-ru="Онбординг новых членов команды ускорился.">Onboarding new team members is faster.</li>
+          </ul>
+        </div>
         <div class="callout callout-warning">
-          <p data-en="Figures are based on team estimates (designer hours, developer story points) and sprint data — not formal A/B testing. Results are directional, not exact." data-ru="Цифры основаны на оценках команды (часы дизайнеров, сторипоинты разработчиков) и данных по спринтам — не на формальном A/B-тестировании. Результаты показательны, но не точны.">Figures are based on team estimates (designer hours, developer story points) and sprint data — not formal A/B testing. Results are directional, not exact.</p>
+          <p data-en="Figures are based on team estimates (designer hours, developer story points) and QA logs — not formal A/B testing. Results are directional, not exact." data-ru="Цифры основаны на оценках команды (часы дизайнеров, сторипоинты разработчиков) и QA-логах — не на формальном A/B-тестировании. Результаты показательны, но не точны.">Figures are based on team estimates (designer hours, developer story points) and QA logs — not formal A/B testing. Results are directional, not exact.</p>
         </div>
       </section>
 
-      <!-- ─── Context ─── -->
+      <!-- ─── Learnings ─── -->
       <section class="section">
         <div class="section-head js-reveal">
-          <p class="eyebrow" data-en="Context" data-ru="Контекст">Context</p>
-          <h2 data-en="How it started" data-ru="С чего всё началось">How it started</h2>
+          <p class="eyebrow" data-en="Learnings" data-ru="Выводы">Learnings</p>
+          <h2 data-en="What I learned / what I'd do differently" data-ru="Чему научилась / что сделала бы иначе">What I learned / what I'd do differently</h2>
         </div>
-        <p class="body-text" data-en="A B2B platform had been growing for 2.5 years without a shared design system. Three product teams built independently — each in their own Figma file, each with their own interpretation of what a button, a card, or a form should look like." data-ru="B2B-платформа росла 2,5 года без единой дизайн-системы. Три продуктовые команды работали независимо — у каждой свой Figma-файл, свой взгляд на то, как должны выглядеть кнопка, карточка или форма.">A B2B platform had been growing for 2.5 years without a shared design system. Three product teams built independently — each in their own Figma file, each with their own interpretation of what a button, a card, or a form should look like.</p>
-        <div class="callout">
-          <p class="callout-title" data-en="214 unique color values. 54 button variants. 3 teams. 0 shared components." data-ru="214 уникальных hex-значений. 54 варианта кнопки. 3 команды. 0 общих компонентов.">214 unique color values. 54 button variants. 3 teams. 0 shared components.</p>
-          <p data-en="Three products of one company looked like they were made by three different companies." data-ru="Три продукта одной компании выглядели так, будто их делали три разные компании.">Three products of one company looked like they were made by three different companies.</p>
-        </div>
-        <p class="body-text" data-en="Every sprint added new inconsistency debt: QA found style bugs that were actually design decisions, developers rebuilt what another team had built a month ago, and designers spent hours searching for 'the right button' instead of solving product problems." data-ru="Каждый спринт добавлял новый долг несоответствий: QA находил стайл-баги, которые на деле были дизайн-решениями, разработчики перестраивали то, что другая команда сделала месяц назад, а дизайнеры тратили часы на поиск «правильной кнопки» вместо продуктовых задач.">Every sprint added new inconsistency debt: QA found style bugs that were actually design decisions, developers rebuilt what another team had built a month ago, and designers spent hours searching for 'the right button' instead of solving product problems.</p>
-        <div class="callout">
-          <p data-en="The real problem wasn't that the interface looked inconsistent. The problem was that teams couldn't collaborate — each spoke a different visual language." data-ru="Настоящая проблема была не в том, что интерфейс выглядел непоследовательно. Проблема — команды не могли сотрудничать: каждая говорила на своём визуальном языке.">The real problem wasn't that the interface looked inconsistent. The problem was that teams couldn't collaborate — each spoke a different visual language.</p>
-        </div>
-      </section>
-
-      <!-- ─── Process ─── -->
-      <section class="section">
-        <div class="section-head js-reveal">
-          <p class="eyebrow" data-en="Process" data-ru="Процесс">Process</p>
-          <h2 data-en="What I did and in what order" data-ru="Что я делал и в каком порядке">What I did and in what order</h2>
-        </div>
-        <p class="body-text" data-en="I led the design system work from scratch — as the single point of responsibility for the cross-team design infrastructure." data-ru="Я вёл работу над дизайн-системой с нуля — как единая точка ответственности за кросс-командную дизайн-инфраструктуру.">I led the design system work from scratch — as the single point of responsibility for the cross-team design infrastructure.</p>
-        <table class="case-table">
-          <thead>
-            <tr>
-              <th data-en="Stage" data-ru="Этап">Stage</th>
-              <th data-en="What I did" data-ru="Что делал">What I did</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-en="Audit" data-ru="Аудит">Audit</td>
-              <td data-en="Inventoried 12 Figma files, found 400+ unique components and 214 color values" data-ru="Провёл инвентаризацию 12 Figma-файлов, нашёл 400+ уникальных компонентов и 214 цветовых значений">Inventoried 12 Figma files, found 400+ unique components and 214 color values</td>
-            </tr>
-            <tr>
-              <td data-en="Token architecture" data-ru="Архитектура токенов">Token architecture</td>
-              <td data-en="Designed a three-level token hierarchy: global → semantic → component" data-ru="Спроектировал трёхуровневую иерархию токенов: global → semantic → component">Designed a three-level token hierarchy: global → semantic → component</td>
-            </tr>
-            <tr>
-              <td data-en="Core library" data-ru="Базовая библиотека">Core library</td>
-              <td data-en="Built 40 base components with variants, states and auto-layout" data-ru="Собрал 40 базовых компонентов с вариантами, состояниями и авто-лейаутом">Built 40 base components with variants, states and auto-layout</td>
-            </tr>
-            <tr>
-              <td data-en="Documentation" data-ru="Документация">Documentation</td>
-              <td data-en="Wrote usage guidelines: do/don't, context of use, connections between components" data-ru="Написал гайдлайны: do/don't, контекст применения, связи между компонентами">Wrote usage guidelines: do/don't, context of use, connections between components</td>
-            </tr>
-            <tr>
-              <td data-en="Adoption" data-ru="Внедрение">Adoption</td>
-              <td data-en="Conducted workshops, migration guide, weekly design syncs across teams" data-ru="Провёл воркшопы, подготовил миграционный гайд, еженедельные синки">Conducted workshops, migration guide, weekly design syncs across teams</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- ─── Audit ─── -->
-      <section class="section">
-        <div class="section-head js-reveal">
-          <p class="eyebrow" data-en="Audit" data-ru="Аудит">Audit</p>
-          <h2 data-en="What I found in the files" data-ru="Что нашёл в файлах">What I found in the files</h2>
-        </div>
-        <p class="body-text" data-en="Before designing anything, I spent two weeks auditing all existing design files. Without understanding the scale of chaos, any solution risks solving the wrong problem." data-ru="Прежде чем проектировать что-либо, я потратил две недели на аудит всех существующих дизайн-файлов. Без понимания масштаба хаоса любое решение рискует решать не ту проблему.">Before designing anything, I spent two weeks auditing all existing design files. Without understanding the scale of chaos, any solution risks solving the wrong problem.</p>
-        <table class="case-table">
-          <thead>
-            <tr>
-              <th data-en="Problem" data-ru="Проблема">Problem</th>
-              <th data-en="What was found" data-ru="Что нашёл">What was found</th>
-              <th data-en="Effect" data-ru="Эффект">Effect</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-en="Color" data-ru="Цвет">Color</td>
-              <td data-en="214 unique hex values, 6 shades of 'brand blue'" data-ru="214 уникальных hex-значений, 6 оттенков «фирменного синего»">214 unique hex values, 6 shades of 'brand blue'</td>
-              <td data-en="Dark theme impossible, theming requires full rebuild" data-ru="Тёмная тема невозможна, тематизация требует полной перестройки">Dark theme impossible, theming requires full rebuild</td>
-            </tr>
-            <tr>
-              <td data-en="Typography" data-ru="Типографика">Typography</td>
-              <td data-en="28 text styles, no semantic naming" data-ru="28 текстовых стилей, без семантических имён">28 text styles, no semantic naming</td>
-              <td data-en="Developers hardcoded font sizes, no shared type scale" data-ru="Разработчики хардкодили размеры шрифтов, нет общей шкалы">Developers hardcoded font sizes, no shared type scale</td>
-            </tr>
-            <tr>
-              <td data-en="Buttons" data-ru="Кнопки">Buttons</td>
-              <td data-en="54 variants across 3 teams" data-ru="54 варианта в 3 командах">54 variants across 3 teams</td>
-              <td data-en="3 implementations in code, endless PR conflicts" data-ru="3 реализации в коде, бесконечные конфликты в PR">3 implementations in code, endless PR conflicts</td>
-            </tr>
-            <tr>
-              <td data-en="Spacing" data-ru="Отступы">Spacing</td>
-              <td data-en="Free-form — any value from 4 to 48px" data-ru="Произвольные — любые значения от 4 до 48 px">Free-form — any value from 4 to 48px</td>
-              <td data-en="Pixel-perfect handoff impossible without manual annotation" data-ru="Pixel-perfect передача невозможна без ручной разметки">Pixel-perfect handoff impossible without manual annotation</td>
-            </tr>
-            <tr>
-              <td data-en="Icons" data-ru="Иконки">Icons</td>
-              <td data-en="3 icon sets mixed together" data-ru="3 иконочных набора перемешаны">3 icon sets mixed together</td>
-              <td data-en="Different visual weight of icons within one product" data-ru="Разный визуальный вес иконок внутри одного продукта">Different visual weight of icons within one product</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="img-placeholder">// тут вставить изображение · DS-02-audit.png — таблица аудита из Figma</div>
-        <div class="callout callout-warning">
-          <p data-en="The audit showed: the problem isn't too many designers. The problem is there was no contract between teams. Everyone worked as best they could — but by their own rules." data-ru="Аудит показал: проблема не в том, что дизайнеров слишком много. Проблема — не было договора между командами. Каждый работал как умел, но по своим правилам.">The audit showed: the problem isn't too many designers. The problem is there was no contract between teams. Everyone worked as best they could — but by their own rules.</p>
-        </div>
-      </section>
-
-      <!-- ─── Architecture ─── -->
-      <section class="section">
-        <div class="section-head js-reveal">
-          <p class="eyebrow" data-en="Architecture" data-ru="Архитектура">Architecture</p>
-          <h2 data-en="How the system is organized" data-ru="Как организована система">How the system is organized</h2>
-        </div>
-        <p class="body-text" data-en="The first and most important decision: start with tokens, not components. A token is a named design decision — not '24px', but 'spacing-lg'. Not '#2563EB', but 'color-action-primary'." data-ru="Первое и самое важное решение: начать с токенов, а не с компонентов. Токен — это именованное дизайн-решение: не «24 px», а «spacing-lg». Не «#2563EB», а «color-action-primary».">The first and most important decision: start with tokens, not components. A token is a named design decision — not '24px', but 'spacing-lg'. Not '#2563EB', but 'color-action-primary'.</p>
-        <table class="case-table">
-          <thead>
-            <tr>
-              <th data-en="Level" data-ru="Уровень">Level</th>
-              <th data-en="Example" data-ru="Пример">Example</th>
-              <th data-en="What it does" data-ru="Для чего">What it does</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Global</td>
-              <td><code>blue-500: #2563EB</code></td>
-              <td data-en="Raw values — not used directly in design" data-ru="Сырые значения — в дизайне напрямую не используются">Raw values — not used directly in design</td>
-            </tr>
-            <tr>
-              <td>Semantic</td>
-              <td><code>color-action-primary: blue-500</code></td>
-              <td data-en="Intent — what this value means in context" data-ru="Смысл — что это значение означает в контексте">Intent — what this value means in context</td>
-            </tr>
-            <tr>
-              <td>Component</td>
-              <td><code>button-primary-bg: color-action-primary</code></td>
-              <td data-en="Component-specific binding — enables isolated overrides" data-ru="Привязка к компоненту — позволяет делать изолированные переопределения">Component-specific binding — enables isolated overrides</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="img-placeholder">// тут вставить изображение · DS-03-tokens.png — схема иерархии токенов</div>
-        <div class="callout">
-          <p class="callout-title" data-en="Why tokens first?" data-ru="Почему сначала токены?">Why tokens first?</p>
-          <p data-en="If you start with components, tokens become an afterthought — and theming, white-labeling, or dark mode will require rebuilding everything from scratch. Tokens are the foundation that makes the system extensible." data-ru="Если начать с компонентов, токены становятся запоздалым решением — и для тематизации, white-label или тёмной темы придётся всё перестраивать. Токены — это фундамент, который делает систему расширяемой.">If you start with components, tokens become an afterthought — and theming, white-labeling, or dark mode will require rebuilding everything from scratch. Tokens are the foundation that makes the system extensible.</p>
-        </div>
-        <p class="case-excluded" data-en="Not taken: starting directly with components — faster at first, but you pay double when a second theme or white-label version is needed." data-ru="Не взял: начать сразу с компонентов — быстрее в начале, но платишь вдвойне когда нужна вторая тема или white-label версия.">Not taken: starting directly with components — faster at first, but you pay double when a second theme or white-label version is needed.</p>
-      </section>
-
-      <!-- ─── Components ─── -->
-      <section class="section">
-        <div class="section-head js-reveal">
-          <p class="eyebrow" data-en="Components" data-ru="Компоненты">Components</p>
-          <h2 data-en="What went into the library" data-ru="Что вошло в библиотеку">What went into the library</h2>
-        </div>
-        <p class="body-text" data-en="I chose a 'lean core' approach deliberately: not 200 components, but 40 well-thought-out ones covering 80% of all product screens. Each component has states, variants, auto-layout and documentation." data-ru="Я сознательно выбрал подход «lean core»: не 200 компонентов, а 40 хорошо продуманных, покрывающих 80% всех продуктовых экранов. У каждого есть состояния, варианты, авто-лейаут и документация.">I chose a 'lean core' approach deliberately: not 200 components, but 40 well-thought-out ones covering 80% of all product screens. Each component has states, variants, auto-layout and documentation.</p>
-        <table class="case-table">
-          <thead>
-            <tr>
-              <th data-en="Group" data-ru="Группа">Group</th>
-              <th data-en="Components" data-ru="Компоненты">Components</th>
-              <th data-en="States" data-ru="Состояния">States</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-en="Actions" data-ru="Действия">Actions</td>
-              <td data-en="Button, Icon button, Link" data-ru="Button, Icon button, Link">Button, Icon button, Link</td>
-              <td data-en="Default, Hover, Active, Disabled, Loading" data-ru="Default, Hover, Active, Disabled, Loading">Default, Hover, Active, Disabled, Loading</td>
-            </tr>
-            <tr>
-              <td data-en="Inputs" data-ru="Поля ввода">Inputs</td>
-              <td data-en="Input, Textarea, Select, Checkbox, Radio, Toggle, Date picker" data-ru="Input, Textarea, Select, Checkbox, Radio, Toggle, Date picker">Input, Textarea, Select, Checkbox, Radio, Toggle, Date picker</td>
-              <td data-en="Empty, Focus, Filled, Error, Disabled" data-ru="Empty, Focus, Filled, Error, Disabled">Empty, Focus, Filled, Error, Disabled</td>
-            </tr>
-            <tr>
-              <td data-en="Feedback" data-ru="Обратная связь">Feedback</td>
-              <td data-en="Toast, Alert, Badge, Tooltip, Skeleton" data-ru="Toast, Alert, Badge, Tooltip, Skeleton">Toast, Alert, Badge, Tooltip, Skeleton</td>
-              <td data-en="Info, Success, Warning, Error" data-ru="Info, Success, Warning, Error">Info, Success, Warning, Error</td>
-            </tr>
-            <tr>
-              <td data-en="Navigation" data-ru="Навигация">Navigation</td>
-              <td data-en="Tabs, Breadcrumb, Sidebar, Pagination" data-ru="Tabs, Breadcrumb, Sidebar, Pagination">Tabs, Breadcrumb, Sidebar, Pagination</td>
-              <td data-en="Active, Inactive, Disabled" data-ru="Active, Inactive, Disabled">Active, Inactive, Disabled</td>
-            </tr>
-            <tr>
-              <td data-en="Data display" data-ru="Отображение данных">Data display</td>
-              <td data-en="Card, Table, Tag, Avatar, Empty state" data-ru="Card, Table, Tag, Avatar, Empty state">Card, Table, Tag, Avatar, Empty state</td>
-              <td data-en="Default, Hover, Selected, Loading" data-ru="Default, Hover, Selected, Loading">Default, Hover, Selected, Loading</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="img-placeholder">// тут вставить изображение · DS-04-components.png — компонентная библиотека в Figma</div>
-      </section>
-
-      <!-- ─── Documentation ─── -->
-      <section class="section">
-        <div class="section-head js-reveal">
-          <p class="eyebrow" data-en="Documentation" data-ru="Документация">Documentation</p>
-          <h2 data-en="How we agreed on usage" data-ru="Как договорились об использовании">How we agreed on usage</h2>
-        </div>
-        <p class="body-text" data-en="The mistake most design systems make: comprehensive documentation that nobody reads. I chose a different principle — 'lean docs': only what's non-obvious, only where a decision needs justification." data-ru="Ошибка большинства дизайн-систем — исчерпывающая документация, которую никто не читает. Я выбрал другой принцип: «lean docs» — только то, что неочевидно, только там где решение нуждается в обосновании.">The mistake most design systems make: comprehensive documentation that nobody reads. I chose a different principle — 'lean docs': only what's non-obvious, only where a decision needs justification.</p>
-        <ul class="plain-list">
-          <li data-en="Each component has one core usage rule (Primary — for the main action on a screen, one per screen)" data-ru="У каждого компонента одно ключевое правило использования (Primary — для главного действия на экране, одна кнопка на экран)">Each component has one core usage rule (Primary — for the main action on a screen, one per screen)</li>
-          <li data-en="Do / Don't examples directly in Figma — visible without switching context" data-ru="Примеры Do / Don't прямо в Figma — видны без переключения контекста">Do / Don't examples directly in Figma — visible without switching context</li>
-          <li data-en="Connections between components — when Toast vs Alert, when Tooltip vs Popover" data-ru="Связи между компонентами — когда Toast, а когда Alert, когда Tooltip, а когда Popover">Connections between components — when Toast vs Alert, when Tooltip vs Popover</li>
-        </ul>
-        <div class="img-placeholder">// тут вставить изображение · DS-05-docs.png — страница документации с Do/Don't</div>
-        <div class="callout">
-          <p data-en="A design system without documentation is just a library of beautiful frames. Documentation is what turns a system into a shared language — not a personal collection." data-ru="Дизайн-система без документации — это просто библиотека красивых фреймов. Документация — то, что превращает систему в общий язык, а не в личную коллекцию.">A design system without documentation is just a library of beautiful frames. Documentation is what turns a system into a shared language — not a personal collection.</p>
-        </div>
-      </section>
-
-      <!-- ─── Adoption ─── -->
-      <section class="section">
-        <div class="section-head js-reveal">
-          <p class="eyebrow" data-en="Adoption" data-ru="Внедрение">Adoption</p>
-          <h2 data-en="How the system took root" data-ru="Как система прижилась">How the system took root</h2>
-        </div>
-        <p class="body-text" data-en="The hardest part of any design system isn't building it — it's adoption. I had three teams with their own momentum and 2.5 years of accumulated patterns." data-ru="Самое сложное в любой дизайн-системе — не построить её, а внедрить. У меня было три команды с собственной инерцией и 2,5 годами накопленных паттернов.">The hardest part of any design system isn't building it — it's adoption. I had three teams with their own momentum and 2.5 years of accumulated patterns.</p>
-        <table class="case-table">
-          <thead>
-            <tr>
-              <th data-en="What I did" data-ru="Что делал">What I did</th>
-              <th data-en="Goal" data-ru="Цель">Goal</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-en="Onboarding workshop for each team (2h)" data-ru="Онбординговый воркшоп для каждой команды (2 ч.)">Onboarding workshop for each team (2h)</td>
-              <td data-en="Show the system live, answer questions, remove fears" data-ru="Показать систему живьём, ответить на вопросы, снять страхи">Show the system live, answer questions, remove fears</td>
-            </tr>
-            <tr>
-              <td data-en="Migration guide with priority levels" data-ru="Миграционный гайд с уровнями приоритета">Migration guide with priority levels</td>
-              <td data-en="Teams migrated gradually without pausing product work" data-ru="Команды мигрировали постепенно, без остановки продуктовой работы">Teams migrated gradually without pausing product work</td>
-            </tr>
-            <tr>
-              <td data-en="Weekly 30-min design syncs" data-ru="Еженедельные дизайн-синки по 30 мин">Weekly 30-min design syncs</td>
-              <td data-en="Surface blockers early, collect change requests" data-ru="Рано замечать блокеры, собирать запросы на изменения">Surface blockers early, collect change requests</td>
-            </tr>
-            <tr>
-              <td data-en="Office hours for developers" data-ru="Office hours для разработчиков">Office hours for developers</td>
-              <td data-en="Close the gap between Figma tokens and CSS implementation" data-ru="Закрыть разрыв между Figma-токенами и CSS-реализацией">Close the gap between Figma tokens and CSS implementation</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="img-placeholder">// тут вставить изображение · DS-06-adoption.png — timeline внедрения по командам</div>
-        <div class="callout callout-warning">
-          <p data-en="Key insight from adoption: designers switched to the system in 2 weeks, developers — in 6. The bottleneck wasn't design — it was synchronizing tokens between Figma and the code repository." data-ru="Ключевой инсайт: дизайнеры перешли на систему за 2 недели, разработчики — за 6. Узкое место было не в дизайне, а в синхронизации токенов между Figma и репозиторием.">Key insight from adoption: designers switched to the system in 2 weeks, developers — in 6. The bottleneck wasn't design — it was synchronizing tokens between Figma and the code repository.</p>
-        </div>
-      </section>
-
-      <!-- ─── Principles ─── -->
-      <section class="section">
-        <div class="section-head js-reveal">
-          <p class="eyebrow" data-en="Principles" data-ru="Принципы">Principles</p>
-          <h2 data-en="Principles that guided me" data-ru="Принципы, которые вели меня">Principles that guided me</h2>
-        </div>
-        <p class="body-text" data-en="Design system work taught me: the hardest thing isn't making something beautiful — it's making it useful to people who didn't participate in its creation." data-ru="Работа над дизайн-системой научила меня: самое сложное — не сделать что-то красивым, а сделать полезным для людей, которые не участвовали в его создании.">Design system work taught me: the hardest thing isn't making something beautiful — it's making it useful to people who didn't participate in its creation.</p>
         <div class="timeline">
           <article class="job js-reveal">
-            <h3 data-en="1. Tokens before components" data-ru="1. Токены до компонентов">1. Tokens before components</h3>
-            <p data-en="A design system without a token foundation is a beautiful thing you'll have to throw away when the first theming request arrives." data-ru="Дизайн-система без фундамента из токенов — красивая вещь, которую придётся выбросить при первом запросе на тематизацию.">A design system without a token foundation is a beautiful thing you'll have to throw away when the first theming request arrives.</p>
+            <h3 data-en="Tokens first, then components" data-ru="Сначала токены, потом компоненты">Tokens first, then components</h3>
+            <p data-en="Cleaning up color and typography removed up to 80% of visual chaos before any component was assembled." data-ru="Наведение порядка в цвете и типографике сняло до 80% визуального хаоса ещё до сборки компонентов.">Cleaning up color and typography removed up to 80% of visual chaos before any component was assembled.</p>
           </article>
           <article class="job js-reveal">
-            <h3 data-en="2. Lean core, not comprehensive coverage" data-ru="2. Lean core, а не исчерпывающее покрытие">2. Lean core, not comprehensive coverage</h3>
-            <p data-en="40 well-documented components beat 200 poorly documented ones. A system people don't use is just a collection of frames." data-ru="40 хорошо задокументированных компонентов лучше, чем 200 плохо задокументированных. Система, которую не используют — просто коллекция фреймов.">40 well-documented components beat 200 poorly documented ones. A system people don't use is just a collection of frames.</p>
+            <h3 data-en="Governance over aesthetics" data-ru="Governance важнее красоты">Governance over aesthetics</h3>
+            <p data-en="A system only lives if there's a contribution process and an owner. Without it, it drifts apart again." data-ru="Система живёт, только если есть процесс контрибуции и владелец. Без этого она снова расползётся.">A system only lives if there's a contribution process and an owner. Without it, it drifts apart again.</p>
           </article>
           <article class="job js-reveal">
-            <h3 data-en="3. Adoption is a design problem" data-ru="3. Внедрение — это дизайн-задача">3. Adoption is a design problem</h3>
-            <p data-en="Building the library is 40% of the work. 60% is making other teams actually want to use it. Workshops, syncs, office hours — this is part of design system work, not overhead." data-ru="Сборка библиотеки — 40% работы. 60% — сделать так, чтобы другие команды захотели её использовать. Воркшопы, синки, office hours — это часть работы над дизайн-системой, а не накладные расходы.">Building the library is 40% of the work. 60% is making other teams actually want to use it. Workshops, syncs, office hours — this is part of design system work, not overhead.</p>
+            <h3 data-en="Migration is a product" data-ru="Миграция — это продукт">Migration is a product</h3>
+            <p data-en="I prioritized screens by frequency (tables, forms) rather than 'in order' — fast visible impact over completeness." data-ru="Я приоритизировала экраны по частотности (таблицы, формы), а не «по порядку», и это дало быстрый видимый эффект.">I prioritized screens by frequency (tables, forms) rather than "in order" — fast visible impact over completeness.</p>
           </article>
           <article class="job js-reveal">
-            <h3 data-en="4. A design system is never finished" data-ru="4. Дизайн-система никогда не заканчивается">4. A design system is never finished</h3>
-            <p data-en="It's a living product that grows with the teams using it. 'Version 1.0 is done' isn't the finish line — it's the start of the maintenance cycle." data-ru="Это живой продукт, растущий вместе с командами, которые его используют. «Версия 1.0 готова» — не финиш, а начало цикла поддержки.">It's a living product that grows with the teams using it. 'Version 1.0 is done' isn't the finish line — it's the start of the maintenance cycle.</p>
+            <h3 data-en="What I'd do differently" data-ru="Что сделала бы иначе">What I'd do differently</h3>
+            <p data-en="Bring developers into the token work earlier — parallel rather than sequential design and code assembly would have saved weeks." data-ru="Раньше подключила бы разработчиков к токенам — параллельная, а не последовательная сборка дизайна и кода сэкономила бы недели.">Bring developers into the token work earlier — parallel rather than sequential design and code assembly would have saved weeks.</p>
           </article>
         </div>
+        <div class="img-placeholder">// DS-13-final.png — финальный «после»: общий вид кабинета AdCombo, собранного на дизайн-системе</div>
       </section>
 
     </main>
